@@ -6,7 +6,7 @@
 
 using namespace std;
 
-bool FillArrays(ifstream& scoresData, string names[], int scores[][10]);
+bool FillArrays(ifstream& scoresData, string names[], int scores[][4]);
 int CalculateAverage(string names[], int scores[]);
 void Output(string names[],int scores[],int average[]);
 
@@ -19,7 +19,7 @@ int main() {
 
 	//array variables
 	string names[10];//array listing the names of the bowlers
-	int scores[4][10];//multidimensional array of the scores
+	int scores[10][4];//multidimensional array of the scores
 	int average[10];//array of the average scores
 
 	/*while (scoresData.get(temp)) {
@@ -33,7 +33,7 @@ int main() {
 
 	scoresData.close();
 }
-bool FillArrays(ifstream& scoresData, string names[], int scores[][10]) {//unfinished function
+bool FillArrays(ifstream& scoresData, string names[], int scores[][4]) {//unfinished function
 	char temp;
 	int c = 0;
 	string tempname;
@@ -48,10 +48,10 @@ bool FillArrays(ifstream& scoresData, string names[], int scores[][10]) {//unfin
 			tempname.clear();
 		}
 	}
-	//cout << tempname;
+	////////////////////////////
 
-	for (int i = 0; i < 10; i++) {
-		cout << names[i] << endl << i << endl;
+	for (int i = 0; i < c; i++) {
+		cout << names[i] << endl;
 	}
 
 	return true;
