@@ -48,10 +48,10 @@ bool FillArrays(ifstream& scoresData, string names[], int scores[][10]) {//unfin
 			tempname.clear();
 		}
 	}
-	cout << tempname;
+	//cout << tempname;
 
-	for (int i = 0; i < names->size(); i++) {
-		cout << names[i] << endl;
+	for (int i = 0; i < 10; i++) {
+		cout << names[i] << endl << i << endl;
 	}
 
 	return true;
