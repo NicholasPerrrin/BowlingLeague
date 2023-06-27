@@ -36,15 +36,10 @@ int main() {
 bool FillArrays(ifstream& scoresData, string names[], int scores[][10]) {//unfinished function. Any ideas on how to extract names? This is extracting characters.
 	char temp;
 	int c = 0;
-	while (scoresData.get(temp)) {
-		if (temp != ' ') {
+	while (scoresData.get(temp) && temp != ' ') {
 			cout << temp;
 			names[c] = temp;
 			c++;
-		}
-		else {
-			
-		}
 	}
 
 	for (int i = 0; i < 10; i++) {
