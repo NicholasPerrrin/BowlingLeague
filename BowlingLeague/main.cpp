@@ -51,7 +51,15 @@ bool FillArrays(ifstream& scoresData, string names[], char scores[][4]) {//unfin
 	}
 	////////////////////////////
 	//create the multi dimensional array of bowler's scores (incomplete)
-
+	int i;//index of rows
+	int j;//index of columns
+	//for statement to iterate through rows
+	for (i = 0; i < 10; i++) {
+		//for statement to iterate through columns
+		for (j = 0; j < 4; j++) {
+			//statements to add score elements to specified index
+		}
+	}
 
 	////////////////////////////
 	for (int i = 0; i < c; i++) {
