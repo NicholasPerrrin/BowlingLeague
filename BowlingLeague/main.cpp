@@ -96,5 +96,5 @@ bool FillArrays(ifstream& scoresData, string names[], string scores[10][4]) {//u
 ////////////////////////////
 //create an array of the bowler's average scores
 int CalculateAverage(string names[], char scores[]) {
-
+	return 1;
 }
