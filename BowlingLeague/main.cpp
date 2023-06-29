@@ -49,10 +49,14 @@ bool FillArrays(ifstream& scoresData, string names[], char scores[][4]) {//unfin
 			tempname.clear();
 		}
 	}
+	scoresData.close();
+	scoresData.open("BowlingScores.txt");
 	////////////////////////////
 	//create the multi dimensional array of bowler's scores (incomplete)
 	int i;//index of rows
 	int j;//index of columns
+	//remove names from the file
+	scoresData.ignore(100, ' ');
 	//for statement to iterate through rows
 	for (i = 0; i < 10; i++) {
 		//for statement to iterate through columns
