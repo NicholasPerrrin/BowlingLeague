@@ -6,7 +6,7 @@
 
 using namespace std;
 
-bool FillArrays(ifstream& scoresData, string names[], char scores[][4]);
+bool FillArrays(ifstream& scoresData, string names[], string scores[][4]);
 int CalculateAverage(string names[], char scores[]);
 void Output(string names[],char scores[],char average[]);
 
@@ -19,7 +19,7 @@ int main() {
 
 	//array variables
 	string names[10];//array listing the names of the bowlers
-	char scores[10][4];//multidimensional array of the scores
+	string scores[10][4];//multidimensional array of the scores
 	char average[10];//array of the average scores
 
 	/*while (scoresData.get(temp)) {
@@ -33,7 +33,7 @@ int main() {
 
 	scoresData.close();
 }
-bool FillArrays(ifstream& scoresData, string names[], char scores[][4]) {//unfinished function
+bool FillArrays(ifstream& scoresData, string names[], string scores[10][4]) {//unfinished function
 	//create an array of the bowler's names (complete)
 	char temp;
 	int c = 0;
@@ -53,14 +53,23 @@ bool FillArrays(ifstream& scoresData, string names[], char scores[][4]) {//unfin
 	scoresData.open("BowlingScores.txt");
 	////////////////////////////
 	//create the multi dimensional array of bowler's scores (incomplete)
-	int i;//index of rows
-	int j;//index of columns
-	//remove names from the file
-	scoresData.ignore(100, ' ');
+	int i = 0;//index of rows
+	int j = 0;//index of columns
+	string tempscore;
+	
 	//for statement to iterate through rows
-	for (i = 0; i < 10; i++) {
+	for (i; i < 10; i++) {
+		//remove names from the file
+		scoresData.ignore(100, ' ');
 		//for statement to iterate through columns
 		for (j = 0; j < 4; j++) {
+			while (scoresData.peek() != ' ' && scoresData.peek() != '\n' && !scoresData.eof()) {
+				scoresData.get(temp);
+				tempscore = tempscore + temp;
+			}
+			scores[i][j] = tempscore;
+			scoresData.get(temp);
+			tempscore.clear();
 			//statements to add score elements to specified index
 		}
 	}
@@ -68,6 +77,16 @@ bool FillArrays(ifstream& scoresData, string names[], char scores[][4]) {//unfin
 	////////////////////////////
 	for (int i = 0; i < c; i++) {
 		cout << names[i] << endl;
+	}
+	cout << endl << endl;
+
+	int index = 0;
+	for (int q = 0; q < 10; q++) {
+		for (int k = 0; k < 4; k++) {
+
+			cout << "index: " << index << "   " << scores[q][k] << endl << endl;
+			index++;
+		}
 	}
 
 	return true;
