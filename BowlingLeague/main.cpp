@@ -52,7 +52,7 @@ bool FillArrays(ifstream& scoresData, string names[], string scores[10][4]) {//u
 	scoresData.close();
 	scoresData.open("BowlingScores.txt");
 	////////////////////////////
-	//create the multi dimensional array of bowler's scores (incomplete)
+	//create the multi dimensional array of bowler's scores (complete)
 	int i = 0;//index of rows
 	int j = 0;//index of columns
 	string tempscore;
@@ -63,14 +63,16 @@ bool FillArrays(ifstream& scoresData, string names[], string scores[10][4]) {//u
 		scoresData.ignore(100, ' ');
 		//for statement to iterate through columns
 		for (j = 0; j < 4; j++) {
+			//the below line confirms that the next character is valid
 			while (scoresData.peek() != ' ' && scoresData.peek() != '\n' && !scoresData.eof()) {
 				scoresData.get(temp);
+				//append the present character to a string to store in a two dimensional array
 				tempscore = tempscore + temp;
 			}
+			//statements to add score elements (string) to specified index
 			scores[i][j] = tempscore;
 			scoresData.get(temp);
 			tempscore.clear();
-			//statements to add score elements to specified index
 		}
 	}
 
