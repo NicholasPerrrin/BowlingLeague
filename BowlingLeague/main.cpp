@@ -34,6 +34,7 @@ int main() {
 	scoresData.close();
 }
 bool FillArrays(ifstream& scoresData, string names[], char scores[][4]) {//unfinished function
+	//create an array of the bowler's names (complete)
 	char temp;
 	int c = 0;
 	string tempname;
@@ -49,6 +50,7 @@ bool FillArrays(ifstream& scoresData, string names[], char scores[][4]) {//unfin
 		}
 	}
 	////////////////////////////
+	//create the multi dimensional array of bowler's scores (incomplete)
 
 
 	////////////////////////////
