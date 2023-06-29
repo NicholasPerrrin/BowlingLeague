@@ -76,9 +76,6 @@ bool FillArrays(ifstream& scoresData, string names[], string scores[10][4]) {//u
 		}
 	}
 	////////////////////////////
-	//create an array of the bowler's average scores
-
-	////////////////////////////
 	//everything below this line just makes sure that the arrays are filling properly (ouputs every element)
 	for (int i = 0; i < c; i++) {
 		cout << names[i] << endl;
@@ -95,4 +92,9 @@ bool FillArrays(ifstream& scoresData, string names[], string scores[10][4]) {//u
 	}
 
 	return true;
+}
+////////////////////////////
+//create an array of the bowler's average scores
+int CalculateAverage(string names[], char scores[]) {
+
 }
