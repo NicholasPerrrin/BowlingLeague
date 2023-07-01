@@ -3,45 +3,36 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <iomanip>
 
 using namespace std;
 
 bool FillArrays(string scoresfile, string names[], string scores[][4]);
-int CalculateAverage(string names[], string scores[][4]);
-void Output(string names[],char scores[],char average[]);
+void CalculateAverage(string names[], string scores[][4], int average[]);
+void Output(string names[],char scores[],int average[]);
 void outputResults(string bowlers[], string scores[][4], int averages[]);
 
 int main() {
 	char temp;
 	//file variables
-	ifstream scoresData;
+
 	string scoresfile = "BowlingScores.txt";
-	//scoresData.open("BowlingScores.txt");
-	ofstream outData;
 
 	//array variables
 	string names[10];//array listing the names of the bowlers
 	string scores[10][4];//multidimensional array of the scores
 	int average[10];//array of the average scores
 
-	/*while (scoresData.get(temp)) {
-		cout << temp;
-	}*/
-	//scoresData.close();
-
 	cout << endl << endl << endl;
 
-	cout << FillArrays(scoresfile, names, scores);
-
-	scoresData.close();
+	FillArrays(scoresfile, names, scores);
 
 	//call Average function
-	int test = CalculateAverage(names, scores);
+	CalculateAverage(names, scores, average);
 
 	outputResults(names, scores, average);
 }
-int CalculateAverage(string names[], string scores[][4]) {
-	int averages[10];
+void CalculateAverage(string names[], string scores[][4], int average[]) {
 	int index = 0;
 	int total = 0;
 	int avg;
@@ -50,15 +41,10 @@ int CalculateAverage(string names[], string scores[][4]) {
 			total = total + stoi(scores[c][i]);
 		}
 		avg = total / 4;
-		averages[index] = avg;
+		average[index] = avg;
 		index++;
 		total = 0;
 	}
-	for (int c = 0; c < 10; c++) {
-		cout << "Average: " << averages[c] << endl;
-	}
-
-	return 1;
 }
 bool FillArrays(string scoresfile, string names[], string scores[10][4]) {//unfinished function
 	//create an array of the bowler's names (complete)
@@ -104,21 +90,6 @@ bool FillArrays(string scoresfile, string names[], string scores[10][4]) {//unfi
 			tempscore.clear();
 		}
 	}
-	////////////////////////////
-	//everything below this line just makes sure that the arrays are filling properly (ouputs every element)
-	for (int i = 0; i < c; i++) {
-		cout << names[i] << endl;
-	}
-	cout << endl << endl;
-
-	int index = 0;
-	for (int q = 0; q < 10; q++) {
-		for (int k = 0; k < 4; k++) {
-
-			cout << "index: " << index << "   " << scores[q][k] << endl << endl;
-			index++;
-		}
-	}
 
 	return true;
 }
@@ -126,21 +97,23 @@ bool FillArrays(string scoresfile, string names[], string scores[10][4]) {//unfi
 //create an array of the bowler's average scores
 //////////////////////////////////////////////////////////
 void outputResults(string bowlers[], string scores[][4], int averages[]) {
-//	ofstream outputFile("scores.dat");
-//	return;
-//
-//
+	ofstream outputFile("scores.dat");
+
+	cout << setfill('.');
+	outputFile << setfill('.');
 	for (int i = 0; i < 10; i++) {
-		cout << bowlers[i] << endl;
-//		//outputFile << bowlers[i] << endl;
-//
+		cout << bowlers[i] << setw(15 - bowlers[i].length());
+		outputFile << bowlers[i] << setw(15 - bowlers[i].length());
+		
 		for (int j = 0; j < 4; j++) {
-			cout << scores[i][j] << endl;
-//			//outputFile << scores[i][j] << endl;
+			cout << scores[i][j] << setw(15);
+			outputFile << scores[i][j] << setw(15);
 		}
-//
+		cout << averages[i];
+		outputFile << averages[i];
+
 		cout << endl;
-//		//outputFile << endl;
+		outputFile << endl;
 	}
-//	outputFile.close();
+	outputFile.close();
 }
