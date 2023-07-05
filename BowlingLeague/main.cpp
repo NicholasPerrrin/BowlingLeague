@@ -35,13 +35,11 @@ int main() {
 	int average[rows];//array of the average scores
 
 	//array of structures
-	bowler structArray[columns];
+	bowler structArray[rows];
 
 	cout << endl << endl << endl;
 
 	FillArrays(scoresfile, names, scores, structArray);
-
-	//FillStructures(scoresfile, structArray);
 
 	//call Average function
 	CalculateAverage(names, scores, average);
@@ -111,7 +109,6 @@ bool FillArrays(string scoresfile, string names[], string scores[rows][columns],
 	return true;
 }
 ////////////////////////////
-//create an array of the bowler's average scores
 //////////////////////////////////////////////////////////
 void outputResults(string bowlers[], string scores[][columns], int averages[]) {
 	ofstream outputFile("scores.dat");
