@@ -15,6 +15,8 @@ bool FillArrays(string scoresfile, string names[], string scores[][columns]);
 void CalculateAverage(string names[], string scores[][columns], int average[]);
 void Output(string names[], char scores[], int average[]);
 void outputResults(string bowlers[], string scores[][columns], int averages[]);
+bool FillStructures(string scoresfile, struct bowlers[columns]);
+void CalclateStructAverage(struct bowlers[columns]);
 
 //struct
 struct bowler {
@@ -128,4 +130,8 @@ void outputResults(string bowlers[], string scores[][columns], int averages[]) {
 		outputFile << endl;
 	}
 	outputFile.close();
+}
+///////////////////////////////////////////////////////////
+bool FillStructures(string scoresfile, struct bowlers[columns]) {
+
 }
