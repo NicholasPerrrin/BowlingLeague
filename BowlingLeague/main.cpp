@@ -19,7 +19,7 @@ void outputResults(string bowlers[], string scores[][columns], int averages[]);
 //struct
 struct bowler {
 	string name;
-	int fourScores[4];
+	int fourScores[rows];
 	int averageScore;
 };
 
@@ -31,6 +31,9 @@ int main() {
 	string names[rows];//array listing the names of the bowlers
 	string scores[rows][columns];//multidimensional array of the scores
 	int average[rows];//array of the average scores
+
+	//array of structures
+	bowler structArray[columns];
 
 	cout << endl << endl << endl;
 
