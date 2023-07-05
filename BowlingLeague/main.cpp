@@ -18,7 +18,7 @@ struct bowler {
 	int averageScore;
 };
 
-bool FillArrays(string scoresfile, string names[], string scores[][columns]);
+bool FillArrays(string scoresfile, string names[], string scores[][columns], bowler strutcure[]);
 void CalculateAverage(string names[], string scores[][columns], int average[]);
 void Output(string names[], char scores[], int average[]);
 void outputResults(string bowlers[], string scores[][columns], int averages[]);
@@ -39,7 +39,7 @@ int main() {
 
 	cout << endl << endl << endl;
 
-	FillArrays(scoresfile, names, scores);
+	FillArrays(scoresfile, names, scores, structArray);
 
 	//FillStructures(scoresfile, structArray);
 
@@ -62,7 +62,7 @@ void CalculateAverage(string names[], string scores[][columns], int average[]) {
 		total = 0;
 	}
 }
-bool FillArrays(string scoresfile, string names[], string scores[rows][columns]) {//unfinished function
+bool FillArrays(string scoresfile, string names[], string scores[rows][columns], bowler bowlers[]) {//unfinished function
 	//create an array of the bowler's names (complete)
 	ifstream scoresData;
 	scoresData.open(scoresfile);
@@ -76,6 +76,7 @@ bool FillArrays(string scoresfile, string names[], string scores[rows][columns])
 		else {
 			scoresData.ignore(100, '\n');
 			names[c] = tempname;
+			bowlers[c].name = tempname;
 			c++;
 			tempname.clear();
 		}
