@@ -7,10 +7,21 @@
 
 using namespace std;
 
-bool FillArrays(string scoresfile, string names[], string scores[][4]);
-void CalculateAverage(string names[], string scores[][4], int average[]);
-void Output(string names[],char scores[],int average[]);
-void outputResults(string bowlers[], string scores[][4], int averages[]);
+//global variables
+const int rows = 10;
+const int columns = 4;
+
+bool FillArrays(string scoresfile, string names[], string scores[][columns]);
+void CalculateAverage(string names[], string scores[][columns], int average[]);
+void Output(string names[], char scores[], int average[]);
+void outputResults(string bowlers[], string scores[][columns], int averages[]);
+
+//struct
+struct bowler {
+	string name;
+	int fourScores[4];
+	int averageScore;
+};
 
 int main() {
 	char temp;
@@ -19,9 +30,9 @@ int main() {
 	string scoresfile = "BowlingScores.txt";
 
 	//array variables
-	string names[10];//array listing the names of the bowlers
-	string scores[10][4];//multidimensional array of the scores
-	int average[10];//array of the average scores
+	string names[rows];//array listing the names of the bowlers
+	string scores[rows][columns];//multidimensional array of the scores
+	int average[rows];//array of the average scores
 
 	cout << endl << endl << endl;
 
@@ -32,7 +43,7 @@ int main() {
 
 	outputResults(names, scores, average);
 }
-void CalculateAverage(string names[], string scores[][4], int average[]) {
+void CalculateAverage(string names[], string scores[][columns], int average[]) {
 	int index = 0;
 	int total = 0;
 	int avg;
@@ -46,7 +57,7 @@ void CalculateAverage(string names[], string scores[][4], int average[]) {
 		total = 0;
 	}
 }
-bool FillArrays(string scoresfile, string names[], string scores[10][4]) {//unfinished function
+bool FillArrays(string scoresfile, string names[], string scores[rows][columns]) {//unfinished function
 	//create an array of the bowler's names (complete)
 	ifstream scoresData;
 	scoresData.open(scoresfile);
@@ -55,10 +66,10 @@ bool FillArrays(string scoresfile, string names[], string scores[10][4]) {//unfi
 	string tempname;
 	while (scoresData.get(temp)) {
 		if (temp != ' ') {
-		tempname = tempname + temp;
+			tempname = tempname + temp;
 		}
 		else {
-			scoresData.ignore(100,'\n');
+			scoresData.ignore(100, '\n');
 			names[c] = tempname;
 			c++;
 			tempname.clear();
@@ -71,7 +82,7 @@ bool FillArrays(string scoresfile, string names[], string scores[10][4]) {//unfi
 	int i = 0;//index of rows
 	int j = 0;//index of columns
 	string tempscore;
-	
+
 	//for statement to iterate through rows
 	for (i; i < 10; i++) {
 		//remove names from the file
@@ -96,7 +107,7 @@ bool FillArrays(string scoresfile, string names[], string scores[10][4]) {//unfi
 ////////////////////////////
 //create an array of the bowler's average scores
 //////////////////////////////////////////////////////////
-void outputResults(string bowlers[], string scores[][4], int averages[]) {
+void outputResults(string bowlers[], string scores[][columns], int averages[]) {
 	ofstream outputFile("scores.dat");
 
 	cout << setfill('.');
@@ -104,7 +115,7 @@ void outputResults(string bowlers[], string scores[][4], int averages[]) {
 	for (int i = 0; i < 10; i++) {
 		cout << bowlers[i] << setw(15 - bowlers[i].length());
 		outputFile << bowlers[i] << setw(15 - bowlers[i].length());
-		
+
 		for (int j = 0; j < 4; j++) {
 			cout << scores[i][j] << setw(15);
 			outputFile << scores[i][j] << setw(15);
