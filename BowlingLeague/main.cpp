@@ -24,9 +24,7 @@ struct bowler {
 };
 
 int main() {
-	char temp;
 	//file variables
-
 	string scoresfile = "BowlingScores.txt";
 
 	//array variables
