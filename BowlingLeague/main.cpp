@@ -60,8 +60,8 @@ void CalculateAverage(string names[], string scores[][columns], int average[]) {
 		total = 0;
 	}
 }
-bool FillArrays(string scoresfile, string names[], string scores[rows][columns], bowler bowlers[]) {//unfinished function
-	//create an array of the bowler's names (complete)
+bool FillArrays(string scoresfile, string scores[rows][columns], bowler bowlers[]) {//unfinished function
+	//populate the name variable of the bowler structure
 	ifstream scoresData;
 	scoresData.open(scoresfile);
 	char temp;
@@ -73,13 +73,19 @@ bool FillArrays(string scoresfile, string names[], string scores[rows][columns],
 		}
 		else {
 			scoresData.ignore(100, '\n');
-			names[c] = tempname;
 			bowlers[c].name = tempname;
+			//create an array of scores for each bowler
+
 			c++;
 			tempname.clear();
 		}
 	}
 	scoresData.close();
+
+	for (int i = 0; i < rows; i++) {
+		cout << '\n' << bowlers[i].name << endl;
+	}
+
 	scoresData.open(scoresfile);
 	////////////////////////////
 	//create the multi dimensional array of bowler's scores (complete)
