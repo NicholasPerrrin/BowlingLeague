@@ -14,11 +14,11 @@ const int columns = 4;
 //struct
 struct bowler {
 	string name;
-	int fourScores[rows];
+	int fourScores[columns];
 	int averageScore;
 };
 
-bool FillArrays(string scoresfile, string names[], string scores[][columns], bowler strutcure[]);
+bool FillArrays(string scoresfile, string scores[][columns], bowler strutcure[]);
 void CalculateAverage(string names[], string scores[][columns], int average[]);
 void Output(string names[], char scores[], int average[]);
 void outputResults(string bowlers[], string scores[][columns], int averages[]);
@@ -39,7 +39,7 @@ int main() {
 
 	cout << endl << endl << endl;
 
-	FillArrays(scoresfile, names, scores, structArray);
+	FillArrays(scoresfile, scores, structArray);
 
 	//call Average function
 	CalculateAverage(names, scores, average);
@@ -66,16 +66,27 @@ bool FillArrays(string scoresfile, string scores[rows][columns], bowler bowlers[
 	scoresData.open(scoresfile);
 	char temp;
 	int c = 0;
+	string tempscore;
 	string tempname;
 	while (scoresData.get(temp)) {
 		if (temp != ' ') {
 			tempname = tempname + temp;
 		}
 		else {
-			scoresData.ignore(100, '\n');
 			bowlers[c].name = tempname;
 			//create an array of scores for each bowler
-
+			for (int j = 0; j < 4; j++) {
+				//the below line confirms that the next character is valid
+				while (scoresData.peek() != ' ' && scoresData.peek() != '\n' && !scoresData.eof()) {
+					scoresData.get(temp);
+					//append the present character to a string to store in a two dimensional array
+					tempscore = tempscore + temp;
+				}
+				//statements to add score elements (string) to specified index
+				bowlers[c].fourScores = stoi(tempscore);//getting an error here
+				scoresData.get(temp);
+				tempscore.clear();
+			}
 			c++;
 			tempname.clear();
 		}
@@ -91,7 +102,7 @@ bool FillArrays(string scoresfile, string scores[rows][columns], bowler bowlers[
 	//create the multi dimensional array of bowler's scores (complete)
 	int i = 0;//index of rows
 	int j = 0;//index of columns
-	string tempscore;
+	//string tempscore;
 
 	//for statement to iterate through rows
 	for (i; i < 10; i++) {
