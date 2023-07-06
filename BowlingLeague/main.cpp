@@ -83,7 +83,7 @@ bool FillArrays(string scoresfile, string scores[rows][columns], bowler bowlers[
 					tempscore = tempscore + temp;
 				}
 				//statements to add score elements (string) to specified index
-				bowlers[c].fourScores = stoi(tempscore);//getting an error here
+				bowlers[c].fourScores[j] = stoi(tempscore);
 				scoresData.get(temp);
 				tempscore.clear();
 			}
@@ -95,6 +95,10 @@ bool FillArrays(string scoresfile, string scores[rows][columns], bowler bowlers[
 
 	for (int i = 0; i < rows; i++) {
 		cout << '\n' << bowlers[i].name << endl;
+		for (int j = 0; j < columns; j++) {
+			cout << bowlers[i].fourScores[j] << "  ";
+		}
+		cout << endl;
 	}
 
 	scoresData.open(scoresfile);
