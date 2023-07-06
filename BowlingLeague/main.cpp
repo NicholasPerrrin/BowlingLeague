@@ -18,23 +18,13 @@ struct bowler {
 	int averageScore;
 };
 
-//bool FillArrays(string scoresfile, string scores[][columns], bowler strutcure[]);
 bool FillArrays(string scoresfile, bowler strutcure[]);
-//void CalculateAverage(string names[], string scores[][columns], int average[]);
-//void Output(string names[], char scores[], int average[]);
-//void outputResults(string bowlers[], string scores[][columns], int averages[]);
 void outputResults(bowler bowlers[]);
-//bool FillStructures(string scoresfile, bowler bowlers[columns]);
 void CalculateAverage(bowler bowlers[columns]);
 
 int main() {
 	//file variables
 	string scoresfile = "BowlingScores.txt";
-
-	//array variables
-	string names[rows];//array listing the names of the bowlers
-	string scores[rows][columns];//multidimensional array of the scores
-	int average[rows];//array of the average scores
 
 	//array of structures
 	bowler structArray[rows];
@@ -59,7 +49,7 @@ void CalculateAverage(bowler bowlers[]) {
 		bowlers[i].averageScore = avg;
 	}
 }
-bool FillArrays(string scoresfile, bowler bowlers[]) {//unfinished function
+bool FillArrays(string scoresfile, bowler bowlers[]) {
 	//populate the name variable of the bowler structure
 	ifstream scoresData;
 	scoresData.open(scoresfile);
