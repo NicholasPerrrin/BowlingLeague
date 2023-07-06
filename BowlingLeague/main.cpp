@@ -18,12 +18,14 @@ struct bowler {
 	int averageScore;
 };
 
-bool FillArrays(string scoresfile, string scores[][columns], bowler strutcure[]);
-void CalculateAverage(string names[], string scores[][columns], int average[]);
-void Output(string names[], char scores[], int average[]);
-void outputResults(string bowlers[], string scores[][columns], int averages[]);
+//bool FillArrays(string scoresfile, string scores[][columns], bowler strutcure[]);
+bool FillArrays(string scoresfile, bowler strutcure[]);
+//void CalculateAverage(string names[], string scores[][columns], int average[]);
+//void Output(string names[], char scores[], int average[]);
+//void outputResults(string bowlers[], string scores[][columns], int averages[]);
+void outputResults(bowler bowlers[]);
 //bool FillStructures(string scoresfile, bowler bowlers[columns]);
-void CalclateStructAverage(bowler bowlers[columns]);
+void CalculateAverage(bowler bowlers[columns]);
 
 int main() {
 	//file variables
@@ -39,28 +41,25 @@ int main() {
 
 	cout << endl << endl << endl;
 
-	FillArrays(scoresfile, scores, structArray);
+	FillArrays(scoresfile, structArray);
 
 	//call Average function
-	CalculateAverage(names, scores, average);
+	CalculateAverage(structArray);
 
-	outputResults(names, scores, average);
+	outputResults(structArray);
 }
-void CalculateAverage(string names[], string scores[][columns], int average[]) {
-	int index = 0;
+void CalculateAverage(bowler bowlers[]) {
 	int total = 0;
 	int avg;
-	for (int c = 0; c < 10; c++) {
-		for (int i = 0; i < 4; i++) {
-			total = total + stoi(scores[c][i]);
+	for (int i = 0; i < rows; i++) {
+		for (int c = 0; c < columns; c++) {
+			total = total + bowlers[i].fourScores[c];
 		}
-		avg = total / 4;
-		average[index] = avg;
-		index++;
-		total = 0;
+		avg = total / columns;
+		bowlers[i].averageScore = avg;
 	}
 }
-bool FillArrays(string scoresfile, string scores[rows][columns], bowler bowlers[]) {//unfinished function
+bool FillArrays(string scoresfile, bowler bowlers[]) {//unfinished function
 	//populate the name variable of the bowler structure
 	ifstream scoresData;
 	scoresData.open(scoresfile);
@@ -92,60 +91,28 @@ bool FillArrays(string scoresfile, string scores[rows][columns], bowler bowlers[
 		}
 	}
 	scoresData.close();
-
-	for (int i = 0; i < rows; i++) {
-		cout << '\n' << bowlers[i].name << endl;
-		for (int j = 0; j < columns; j++) {
-			cout << bowlers[i].fourScores[j] << "  ";
-		}
-		cout << endl;
-	}
-
-	scoresData.open(scoresfile);
 	////////////////////////////
-	//create the multi dimensional array of bowler's scores (complete)
-	int i = 0;//index of rows
-	int j = 0;//index of columns
-	//string tempscore;
-
-	//for statement to iterate through rows
-	for (i; i < 10; i++) {
-		//remove names from the file
-		scoresData.ignore(100, ' ');
-		//for statement to iterate through columns
-		for (j = 0; j < 4; j++) {
-			//the below line confirms that the next character is valid
-			while (scoresData.peek() != ' ' && scoresData.peek() != '\n' && !scoresData.eof()) {
-				scoresData.get(temp);
-				//append the present character to a string to store in a two dimensional array
-				tempscore = tempscore + temp;
-			}
-			//statements to add score elements (string) to specified index
-			scores[i][j] = tempscore;
-			scoresData.get(temp);
-			tempscore.clear();
-		}
-	}
-
 	return true;
 }
 ////////////////////////////
 //////////////////////////////////////////////////////////
-void outputResults(string bowlers[], string scores[][columns], int averages[]) {
+void outputResults(bowler bowlers[]) {
 	ofstream outputFile("scores.dat");
 
 	cout << setfill('.');
 	outputFile << setfill('.');
-	for (int i = 0; i < 10; i++) {
-		cout << bowlers[i] << setw(15 - bowlers[i].length());
-		outputFile << bowlers[i] << setw(15 - bowlers[i].length());
-
-		for (int j = 0; j < 4; j++) {
-			cout << scores[i][j] << setw(15);
-			outputFile << scores[i][j] << setw(15);
+	for (int i = 0; i < rows; i++) {
+		//ouput bowler names
+		cout << bowlers[i].name << setw(15 - bowlers[i].name.length());
+		outputFile << bowlers[i].name << setw(15 - bowlers[i].name.length());
+		//output bowler scores
+		for (int j = 0; j < columns; j++) {
+			cout << bowlers[i].fourScores[j] << setw(15);
+			outputFile << bowlers[i].fourScores[j] << setw(15);
 		}
-		cout << averages[i];
-		outputFile << averages[i];
+		//ouput bowler averages
+		cout << bowlers[i].averageScore;
+		outputFile << bowlers[i].averageScore;
 
 		cout << endl;
 		outputFile << endl;
